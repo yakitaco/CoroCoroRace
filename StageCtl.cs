@@ -13,7 +13,7 @@ public class StageCtl : MonoBehaviour
     
     public GameObject obj;  // デバッグ用
     
-    public List<BallCtl> pBallList;
+    public List<GameObject> pBallList;
     
     public int stageStat = 0; // ステージ状態(0:開始前 1:開始中)
     
@@ -30,7 +30,7 @@ public class StageCtl : MonoBehaviour
         // ボール一覧設置
         for ( int i = 0 ; i < ballNum ; i++ ) {
             //if (ballNum % 2 == 1) { // 奇数
-                pBallList.Add(Instantiate(obj, StartBase + StartInterVal * (i / 2) * ((i % 2) * 2 - 1) + StartInterVal * (ballNum % 2) / 2 , Quaternion.identity).GetComponent<BallCtl>());
+                pBallList.Add(Instantiate(obj, StartBase + StartInterVal * (i / 2) * ((i % 2) * 2 - 1) + StartInterVal * (ballNum % 2) / 2 , Quaternion.identity));
             //} else { // 偶数
             //    Instantiate(obj, StartBase, Quaternion.identity);
             //}
@@ -40,7 +40,7 @@ public class StageCtl : MonoBehaviour
     public void startRace(){
         // 全ボールに開始通知
         foreach(var pB in pBallList ){
-            pB.startMove();
+            pB.GetComponent<BallCtl>().startMove();
         }
         stageStat = 1;
     }
@@ -52,10 +52,10 @@ public class StageCtl : MonoBehaviour
             currentTime += Time.deltaTime;
 
             if(currentTime > span){
-                // 順位の前後チェック(最下位はチェックしない)
-                for (int i = 0; i < ballNum - 1; i++) {
+                // 順位の前後チェック(ゴール済みor最下位はチェックしない)
+                for (int i = goalNum; i < ballNum - 1; i++) {
                     // 順位入れ替え要
-                    if (pBallList[i].transform.y > pBallList[i+1].transform.y) {
+                    if (pBallList[i].transform.position.y > pBallList[i+1].transform.position.y) {
                         
                         var cache = pBallList[i];
                         pBallList[i] = pBallList[i+1];
@@ -67,9 +67,9 @@ public class StageCtl : MonoBehaviour
                 currentTime = 0f;
             }
             
-            // ゴール判定
-            if ( int i = goalNum ; i < ballNum ; i++ ) {
-                
+            // ゴール判定(先頭のみ)
+            if (pBallList[goalNum].transform.position.y < GoalY){
+                    goalNum++;
             }
         }
     }
