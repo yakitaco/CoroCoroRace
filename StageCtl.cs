@@ -23,14 +23,14 @@ public class StageCtl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        setBall();
     }
     
     public void setBall(){
         // ボール一覧設置
         for ( int i = 0 ; i < ballNum ; i++ ) {
             //if (ballNum % 2 == 1) { // 奇数
-                pBallList.Add(Instantiate(obj, StartBase + StartInterVal * (i / 2) * ((i % 2) * 2 - 1) + StartInterVal * (ballNum % 2) / 2 , Quaternion.identity));
+                pBallList.Add(Instantiate(obj, StartBase + StartInterVal * ((i+1) / 2) * (((i+1) % 2) * 2 - 1) + StartInterVal * ((ballNum + 1) % 2) / 2 , Quaternion.identity));
             //} else { // 偶数
             //    Instantiate(obj, StartBase, Quaternion.identity);
             //}
