@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuiCtl : MonoBehaviour
+public class followCamera : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,9 +15,4 @@ public class GuiCtl : MonoBehaviour
     {
         
     }
-    
-    public void changeRank(int id, int before, int after){
-        
-    }
-    
 }
