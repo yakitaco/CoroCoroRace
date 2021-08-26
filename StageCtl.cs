@@ -12,6 +12,7 @@ public class StageCtl : MonoBehaviour
     public int goalNum;  // ゴール済数
     
     public GameObject obj;  // デバッグ用
+    public GuiCtl gui;
     
     public List<GameObject> pBallList;
     
