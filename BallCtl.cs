@@ -5,10 +5,16 @@ using UnityEngine;
 public class BallCtl : MonoBehaviour
 {
     private Rigidbody rBody;
+    int id;
     
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+    
+    public void initialize(){
+        GetComponent<Renderer>().material.color = Color.red;
         
     }
     

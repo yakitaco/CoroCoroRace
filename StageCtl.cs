@@ -25,16 +25,20 @@ public class StageCtl : MonoBehaviour
     void Start()
     {
         setBall();
+        startRace();
     }
     
     public void setBall(){
         // ボール一覧設置
         for ( int i = 0 ; i < ballNum ; i++ ) {
+            GameObject nBall = Instantiate(obj, StartBase + StartInterVal * ((i+1) / 2) * (((i+1) % 2) * 2 - 1) + StartInterVal * ((ballNum + 1) % 2) / 2 , Quaternion.identity);
             //if (ballNum % 2 == 1) { // 奇数
-                pBallList.Add(Instantiate(obj, StartBase + StartInterVal * ((i+1) / 2) * (((i+1) % 2) * 2 - 1) + StartInterVal * ((ballNum + 1) % 2) / 2 , Quaternion.identity));
+                pBallList.Add(nBall);
             //} else { // 偶数
             //    Instantiate(obj, StartBase, Quaternion.identity);
             //}
+            nBall.GetComponent<BallCtl>().initialize();
+            
         }
     }
     
@@ -62,6 +66,9 @@ public class StageCtl : MonoBehaviour
                         pBallList[i] = pBallList[i+1];
                         pBallList[i+1] = cache;
                         
+                        gui.changeRank(i,i,i+1);
+                        gui.changeRank(i+1,i+1,i);
+                        Debug.Log("CHG" + i +"<->" + (i+1));
                         i++;
                     }
                 }
@@ -69,7 +76,8 @@ public class StageCtl : MonoBehaviour
             }
             
             // ゴール判定(先頭のみ)
-            if (pBallList[goalNum].transform.position.y < GoalY){
+            if ((goalNum<ballNum)&&(pBallList[goalNum].transform.position.y < GoalY)){
+                    Debug.Log("GOAL" + goalNum);
                     goalNum++;
             }
         }
