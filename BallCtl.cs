@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallCtl : MonoBehaviour
 {
     private Rigidbody rBody;
+    public string name;
     int id;
     
     // Start is called before the first frame update
@@ -13,9 +14,9 @@ public class BallCtl : MonoBehaviour
         
     }
     
-    public void initialize(){
-        GetComponent<Renderer>().material.color = Color.red;
-        
+    public void initialize(string _name, Color _color){
+        GetComponent<Renderer>().material.color = _color;
+        name = _name;
     }
     
     public void startMove(){
