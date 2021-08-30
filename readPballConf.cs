@@ -28,4 +28,13 @@ public class readPballConf
             System.Console.ReadKey();
         }
     }
+    
+    public void get(int c){
+        
+    }
+    
+    public void set(){
+    
+    }
+    
 }
